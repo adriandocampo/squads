@@ -1,7 +1,4 @@
-div[data-baseweb="tag"] {
-    background-color: blue;
-}
-
 div[data-baseweb="select"] > div {
     background-color: red;
+    base:"dark"
 }
