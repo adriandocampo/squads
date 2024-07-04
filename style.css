@@ -1,0 +1,9 @@
+div[role="listbox"] ul {
+    background-color: red;
+}
+
+/* Optional: Customize the dropdown button */
+.stSelectbox > div {
+    background-color: lightgoldenrodyellow;
+    border-radius: 5px;
+}
