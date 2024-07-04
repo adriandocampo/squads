@@ -47,7 +47,17 @@ def main():
             teams = sorted(df['equipo'].unique())
        
             # Streamlit selectbox
-            selected_team = st.selectbox("Select a team:", teams, index=7)        
+            # Load the custom CSS
+            with open("style.css") as f:
+                st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+            
+            # Create a selectbox
+            option = st.selectbox(
+                'Choose an option:',
+                teams
+            )
+            
+            st.write('You selected:', option)        
 
             # Filter data by selected team
             filtered_data = df[df['equipo'] == selected_team]
