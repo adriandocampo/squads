@@ -8,7 +8,7 @@ Created on Thu Jul  4 00:28:12 2024
 import streamlit as st
 import pandas as pd
 import json
-
+import re
 
 # Load data from JSON file
 @st.cache_data(ttl=3600)
@@ -52,25 +52,57 @@ def main():
             # Filter data by selected team
             filtered_data = df[df['equipo'] == selected_team]
             filtered_data['edad'] = filtered_data['edad'].apply(lambda x: x['age'] if isinstance(x, dict) and 'age' in x else None)
+            def convert_to_numeric(value):
+                # Regular expression to find numeric and text parts
+                match = re.match(r"(\d+(\.\d+)?)(\s*(mil|bil|tril)?\s*€)", value, re.IGNORECASE)
+                
+                if match:
+                    num = float(match.group(1))
+                    unit = match.group(4)
+                    
+                    # Convert based on unit
+                    if unit:
+                        if unit.lower() == 'mil':
+                            num *= 1000
+                        elif unit.lower() == 'bil':
+                            num *= 1000000000
+                        elif unit.lower() == 'tril':
+                            num *= 1000000000000
+                    
+                    # Format number with dot as thousand separator
+                    formatted_num = f"{int(num):,}".replace(",", ".")
+                    
+                    # Recombine the numeric value with the currency symbol
+                    return formatted_num
+                
+                return value  # Return the original value if no match       
+            # Apply the function to the DataFrame
+            filtered_data['valor'] = filtered_data['valor'].apply(convert_to_numeric)
+            filtered_data['Value'] = filtered_data['valor'].apply(lambda x: f'{x} €')
+            filtered_data['valor'] = [int(value.replace('.', '').replace('-', '0')) for value in filtered_data['valor']]
             
             # Display squad
             df = filtered_data[filtered_data['termina'] == False]
-            df = df[['nombre', 'edad', 'posicion', 'valor']]
+            total_value = df['valor'].sum()
+            formatted_total_value = '{:,.0f}'.format(total_value).replace(',', '.')
+            df = df[['nombre', 'edad', 'posicion', 'Value']]
             custom_order = ['Portero', 'Defensa central', 'Lateral derecho', 'Lateral izquierdo', 'Pivote', 
                             'Mediocentro', 'Mediocentro ofensivo', 'Mediapunta', 'Extremo derecho', 
                             'Extremo izquierdo', 'Delantero centro', '-']
             df['posicion'] = pd.Categorical(df['posicion'], categories=custom_order, ordered=True)
             df = df.sort_values('posicion')
+            df.columns = ['Nombre', 'Edad', 'Posición', 'Valor']
             # Display the dataframe 
             st.header("Plantilla:")
             st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-        
+            st.write(f"Valor total de la plantilla: {formatted_total_value} €")
 
             # Display signings
             filtered_signings = sig_df[sig_df['equipo'] == selected_team]
             st.header("Fichajes:")
             if len(filtered_signings) > 0: 
                 filtered_signings = filtered_signings[['nombre', 'procedencia']]
+                filtered_signings.columns = ['Nombre', 'Procedencia']
                 st.markdown(filtered_signings.style.hide(axis="index").to_html(), unsafe_allow_html=True)
             else:
                 st.write("_Sin fichajes oficiales_")
@@ -80,12 +112,14 @@ def main():
             st.header("Bajas:")
             if len(filtered_dep) > 0:
                 filtered_dep = filtered_dep[['nombre', 'destino']]
+                filtered_dep.columns = ['Nombre', 'Destino']
                 st.markdown(filtered_dep.style.hide(axis="index").to_html(), unsafe_allow_html=True)
             else:
                 st.write("_Sin bajas oficiales_")
             # Display expiring
             df = filtered_data[filtered_data['termina'] == True]
-            df = df[['nombre', 'edad', 'posicion', 'valor']]
+            df = df[['nombre', 'edad', 'posicion', 'Value']]
+            df.columns = ['Nombre', 'Edad', 'Posición', 'Valor']
             if len(df) > 0:
                 st.header("Terminan contrato:")
                 st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
