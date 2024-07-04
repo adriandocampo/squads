@@ -1,4 +1,4 @@
 div[data-baseweb="select"] > div {
     background-color: red;
-    base:"dark"
+    base: blue;
 }
