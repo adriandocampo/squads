@@ -11,7 +11,7 @@ import json
 
 
 # Load data from JSON file
-@st.cache_data
+@st.cache_data(ttl=3600)
 def load_data(file_path):
     try:
         data = pd.read_json(file_path, encoding='utf-8')
