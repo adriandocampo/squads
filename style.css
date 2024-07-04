@@ -1,4 +1,4 @@
-div[role="listbox"] ul {
+div[data-baseweb="menu"] {
     background-color: red;
 }
 
