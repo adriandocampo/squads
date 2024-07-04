@@ -69,7 +69,7 @@ def main():
                     </style>
                     """, unsafe_allow_html=True)
                     
-                    st.multiselect("foo", ["aaaaaa", "bbee ", "opeen Jej"])       
+            st.multiselect("foo", ["aaaaaa", "bbee ", "opeen Jej"])       
 
 
             #########
