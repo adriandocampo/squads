@@ -41,7 +41,7 @@ def main():
     if not df.empty:
         # Selector for teams
         teams = sorted(df['equipo'].unique())
-        selected_team = st.selectbox(teams, index=None, placeholder="Selecciona un equipo...")
+        selected_team = st.selectbox("Selecciona un equipo...:", teams, index=None)
 
         # Filter data by selected team
         filtered_data = df[df['equipo'] == selected_team]
