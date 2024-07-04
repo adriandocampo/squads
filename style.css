@@ -3,5 +3,5 @@ div[data-baseweb="menu"] {
 }
 
 div[data-baseweb="select"] > div {
-    background-color: chartreuse;
+    background-color: red;
 }
