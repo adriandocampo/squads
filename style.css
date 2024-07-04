@@ -1,5 +1,5 @@
 div[data-baseweb="menu"] {
-    background-color: red;
+    background-color: red !important;
 }
 
 div[data-baseweb="select"] > div {
