@@ -1,4 +1,9 @@
 div[data-baseweb="select"] > div {
-    background-color: yellow;
-    base: blue;
+    background-color: green;
+}
+
+li>span {
+  color: red !important;
+  font-size: 35px;
+  background-color: blue !important;
 }
