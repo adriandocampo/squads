@@ -49,27 +49,28 @@ def main():
             # Streamlit selectbox
             # Load the custom CSS
             st.markdown("""
-                    <style>
-                    /* The input itself */
-                    div[data-baseweb="select"] > div {
-                      background-color: yellow !important;
-                      font-size: 23px !important;
-                    }
-                    
-                    /* The list of choices */
-                    li>span {
-                      color: red !important;
-                      font-size: 35px;
-                      background-color: blue !important;
-                    }
-                    
-                    li {
-                      background-color: green !important;
-                    }
-                    </style>
-                    """, unsafe_allow_html=True)
-                    
-            selected_team = st.multiselect("Selecciona un equipo:", teams)       
+                <style>
+                /* The input itself */
+                div[data-baseweb="select"] > div {
+                    background-color: yellow !important;
+                    font-size: 23px !important;
+                }
+            
+                /* The list of choices */
+                div[data-baseweb="select"] ul {
+                    background-color: blue !important;
+                }
+            
+                div[data-baseweb="select"] li {
+                    color: red !important;
+                    font-size: 35px !important;
+                    background-color: green !important;
+                }
+                </style>
+                """, unsafe_allow_html=True)
+            
+            # Streamlit selectbox
+            selected_team = st.selectbox("Selecciona un equipo:", teams)       
 
 
             #########
