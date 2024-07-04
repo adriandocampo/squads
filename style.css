@@ -1,4 +1,4 @@
-div[role="listbox"] {
+div[data-baseweb="tag"] {
     background-color: blue;
 }
 
