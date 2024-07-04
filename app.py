@@ -95,7 +95,7 @@ def main():
             # Display the dataframe 
             st.header("Plantilla:")
             st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
-            st.write(f"         Valor total de la plantilla:      {formatted_total_value} €")
+            st.write(f"Valor total de la plantilla: {formatted_total_value} €")
 
             # Display signings
             filtered_signings = sig_df[sig_df['equipo'] == selected_team]
