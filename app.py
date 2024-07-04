@@ -41,29 +41,77 @@ def main():
     if not df.empty:
         # Selector for teams
         teams = sorted(df['equipo'].unique())
-        # Add the custom HTML and JavaScript
+        # Add custom HTML, CSS, and JavaScript for the dropdown
         st.markdown("""
             <style>
-            /* Add your custom CSS here if needed */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+        
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+        
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+        
+            .dropdown-content a:hover {background-color: #f1f1f1}
+        
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        
+            .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+            }
             </style>
+            
+            <div class="dropdown">
+                <button class="dropbtn">Select a team</button>
+                <div class="dropdown-content" id="dropdown-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+            
             <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                // Find the select box element
-                var selectBox = document.querySelector('select');
-                
-                // Add an event listener to prevent focus
-                selectBox.addEventListener('focus', function(event) {
+            const teams = """ + str(teams) + """;
+            const dropdownContent = document.getElementById('dropdown-content');
+        
+            teams.forEach(team => {
+                const a = document.createElement('a');
+                a.textContent = team;
+                a.href = "#";
+                a.onclick = function(event) {
                     event.preventDefault();
-                    event.stopPropagation();
-                });
+                    const selectedTeam = team;
+                    Streamlit.setComponentValue(selectedTeam);
+                };
+                dropdownContent.appendChild(a);
             });
             </script>
         """, unsafe_allow_html=True)
         
-        # Streamlit selectbox
-        selected_team = st.selectbox("Select a team:", teams)
+        # Initialize a placeholder for the selected team
+        selected_team = st.empty()
         
-        st.write("Selected team:", selected_team)
+        # Function to handle selection
+        selected_team.write("Selected team: None")
+        
+        # Streamlit's custom component to get the selected team value
+        selected_value = st.experimental_data_editor('', value='')
+        
+        if selected_value:
+            selected_team.write(f"Selected team: {selected_value}")
 
         # Filter data by selected team
         filtered_data = df[df['equipo'] == selected_team]
