@@ -80,22 +80,30 @@ def main():
             filtered_data['valor'] = filtered_data['valor'].apply(convert_to_numeric)
             filtered_data['Value'] = filtered_data['valor'].apply(lambda x: f'{x} €')
             filtered_data['valor'] = [int(value.replace('.', '').replace('-', '0')) for value in filtered_data['valor']]
-            
+            filtered_data['ficha'] = 'P'
+            # Update 'ficha' based on 'sub23' condition
+            for index, row in filtered_data.iterrows():
+                if row['sub23']:
+                    filtered_data.at[index, 'ficha'] = 'Sub23'
             # Display squad
             df = filtered_data[filtered_data['termina'] == False]
             total_value = df['valor'].sum()
+            fichas_p = (df['ficha'] == 'P').sum()
+            fichas_sub23 = (df['ficha'] == 'Sub23').sum()
             formatted_total_value = '{:,.0f}'.format(total_value).replace(',', '.')
-            df = df[['nombre', 'edad', 'posicion', 'Value']]
+            df = df[['ficha', 'nombre', 'edad', 'posicion', 'Value']]
             custom_order = ['Portero', 'Defensa central', 'Lateral derecho', 'Lateral izquierdo', 'Pivote', 
                             'Mediocentro', 'Mediocentro ofensivo', 'Mediapunta', 'Extremo derecho', 
                             'Extremo izquierdo', 'Delantero centro', '-']
             df['posicion'] = pd.Categorical(df['posicion'], categories=custom_order, ordered=True)
             df = df.sort_values('posicion')
-            df.columns = ['Nombre', 'Edad', 'Posición', 'Valor']
+            df.columns = ['Ficha', 'Nombre', 'Edad', 'Posición', 'Valor']
             # Display the dataframe 
             st.header("Plantilla:")
             st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
             st.write(f"Valor total de la plantilla: {formatted_total_value} €")
+            st.write(f"Fichas P: {fichas_p}")
+            st.write(f"Fichas sub23: {fichas_sub23}")
 
             # Display signings
             filtered_signings = sig_df[sig_df['equipo'] == selected_team]
