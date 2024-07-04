@@ -1,5 +1,5 @@
-div[data-baseweb="menu"] {
-    background-color: red !important;
+div[role="listbox"] {
+    background-color: blue;
 }
 
 div[data-baseweb="select"] > div {
