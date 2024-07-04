@@ -48,17 +48,31 @@ def main():
        
             # Streamlit selectbox
             # Load the custom CSS
-            with open("style.css") as f:
-                st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-            
-            # Create a selectbox
-            selected_team = st.selectbox(
-                'Choose an option:',
-                teams
-            )
-            
-            st.write('You selected:', selected_team)        
+            st.markdown("""
+                    <style>
+                    /* The input itself */
+                    div[data-baseweb="select"] > div {
+                      background-color: yellow !important;
+                      font-size: 23px !important;
+                    }
+                    
+                    /* The list of choices */
+                    li>span {
+                      color: red !important;
+                      font-size: 35px;
+                      background-color: blue !important;
+                    }
+                    
+                    li {
+                      background-color: green !important;
+                    }
+                    </style>
+                    """, unsafe_allow_html=True)
+                    
+                    st.multiselect("foo", ["aaaaaa", "bbee ", "opeen Jej"])       
 
+
+            #########
             # Filter data by selected team
             filtered_data = df[df['equipo'] == selected_team]
             filtered_data['edad'] = filtered_data['edad'].apply(lambda x: x['age'] if isinstance(x, dict) and 'age' in x else None)
