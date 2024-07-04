@@ -69,7 +69,7 @@ def main():
                     </style>
                     """, unsafe_allow_html=True)
                     
-            st.multiselect("foo", ["aaaaaa", "bbee ", "opeen Jej"])       
+            selected_team = st.multiselect("Selecciona un equipo:", teams)       
 
 
             #########
