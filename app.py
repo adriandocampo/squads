@@ -52,12 +52,12 @@ def main():
                 st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
             
             # Create a selectbox
-            option = st.selectbox(
+            selected_team = st.selectbox(
                 'Choose an option:',
                 teams
             )
             
-            st.write('You selected:', option)        
+            st.write('You selected:', selected_team)        
 
             # Filter data by selected team
             filtered_data = df[df['equipo'] == selected_team]
