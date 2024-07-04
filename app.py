@@ -56,9 +56,8 @@ def main():
                     font-size: 23px !important;
                 }
             
-                /* The list of choices */
-                div[data-baseweb="select"] ul {
-                    background-color: blue !important;
+                div[role="listbox"] ul {
+                    background-color: red;
                 }
             
                 div[data-baseweb="select"] li {
