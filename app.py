@@ -28,7 +28,7 @@ wide_space_default()
 
 # Streamlit app
 def main():
-    st.title("Plantillas 2a RFEF. Hola")
+    st.title("Plantillas 2a RFEF")
 
     # Load data
     data_file = 'plantillas.json'  # Replace with your JSON file path
