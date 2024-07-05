@@ -54,7 +54,7 @@ def main():
                     background-color: red;
                 }
             
-                div[role="listbox"] li {
+                div[role="option"] li {
                     background-color: red;
             
                 </style>
