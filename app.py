@@ -54,9 +54,9 @@ def main():
                     background-color: red;
                 }
             
-                li[role="option"] li {
+                div[role="option"] {
                     background-color: red;
-            
+                }
                 </style>
                 """, unsafe_allow_html=True)
             
