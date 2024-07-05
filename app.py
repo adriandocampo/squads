@@ -50,21 +50,13 @@ def main():
             # Load the custom CSS
             st.markdown("""
                 <style>
-                /* The input itself */
                 div[data-baseweb="select"] > div {
-                    background-color: yellow !important;
-                    font-size: 23px !important;
-                }
-            
-                div[role="listbox"] ul {
                     background-color: red;
                 }
             
-                div[data-baseweb="select"] li {
-                    color: red !important;
-                    font-size: 35px !important;
-                    background-color: green !important;
-                }
+                div[role="listbox"] li {
+                    background-color: red;
+            
                 </style>
                 """, unsafe_allow_html=True)
             
