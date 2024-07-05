@@ -142,8 +142,8 @@ def main():
                 st.write("_Sin bajas oficiales_")
             # Display expiring
             df = filtered_data[filtered_data['termina'] == True]
-            df = df[['nombre', 'edad', 'posicion', 'Value']]
-            df.columns = ['Nombre', 'Edad', 'Posición', 'Valor']
+            df = df[['ficha', 'nombre', 'edad', 'posicion', 'Value']]
+            df.columns = ['Ficha', 'Nombre', 'Edad', 'Posición', 'Valor']
             if len(df) > 0:
                 st.header("Terminan contrato:")
                 st.markdown(df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
