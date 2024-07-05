@@ -61,7 +61,7 @@ def main():
                 """, unsafe_allow_html=True)
             
             # Streamlit selectbox
-            selected_team = st.selectbox("Selecciona un equipo:", teams)       
+            selected_team = st.selectbox("Selecciona un equipo:", teams, index=7)       
 
 
             #########
