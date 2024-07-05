@@ -51,11 +51,11 @@ def main():
             st.markdown("""
                 <style>
                 div[data-baseweb="select"] > div {
-                    background-color: #400a1b;
+                    background-color: #44526f;
                 }
             
                 li[role="option"] {
-                    background-color: #7f7e7e;
+                    background-color: #421617;
                 }
                 </style>
                 """, unsafe_allow_html=True)
