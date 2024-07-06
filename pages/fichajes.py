@@ -28,7 +28,7 @@ chunk_size = 5
 # List to hold the smaller DataFrames
 df_list = [data.iloc[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
 list_of_lists = [df_chunk.values.tolist() for df_chunk in df_list]
-columns = [['Edad', 'Nombre', 'Posición', 'Desde:', 'A:']]
+columns = ['Edad', 'Nombre', 'Posición', 'Desde:', 'A:']
 
 # Create the DataFrame
 df = pd.DataFrame(list_of_lists, columns=columns)
@@ -37,7 +37,7 @@ def list_to_str(lst):
 
 # Apply the conversion function to each column in the DataFrame
 df = df.applymap(list_to_str)
-df = df['Nombre', 'Edad', 'Posición', 'Desde:', 'A:'
+df = df['Nombre', 'Edad', 'Posición', 'Desde:', 'A:']
 
 if not df.empty:
     col1, col2, col3 = st.columns([1, 2, 1])
