@@ -37,6 +37,7 @@ def list_to_str(lst):
 
 # Apply the conversion function to each column in the DataFrame
 df = df.applymap(list_to_str)
+df = df['Nombre', 'Edad', 'Posición', 'Desde:', 'A:'
 
 if not df.empty:
     col1, col2, col3 = st.columns([1, 2, 1])
