@@ -30,7 +30,7 @@ wide_space_default()
 def main():
     with st.sidebar:
         st.page_link('app.py', label='Plantillas', icon='📌')
-        st.page_link('Pages/fichajes.py', label='Últimos movimientos', icon='✒️')
+        st.page_link('pages/fichajes.py', label='Últimos movimientos', icon='✒️')
     
     st.markdown("<h1 style='text-align: center; color: white; font-size: 2.5em;'>Plantillas 2ª RFEF. Grupo 1.</h1>", unsafe_allow_html=True)
 
