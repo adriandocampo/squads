@@ -39,7 +39,7 @@ def list_to_str(lst):
 df = df.applymap(list_to_str)
 
 if not df.empty:
-    col1, col2, col3 = st.columns([1, 2.4, 1])
+    col1, col2, col3 = st.columns([1, 2.3, 1])
     
     with col2:
         st.markdown("<h1 style='text-align: center; color: white; font-size: 2.5em;'>Últimos movimientos</h1>", unsafe_allow_html=True)
