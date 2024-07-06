@@ -84,17 +84,18 @@
         "81":"Primo",
         "82":"Iago Parga",
         "83":"Álvaro Santamaría",
-        "84":"Julián Morales",
-        "85":"Dani Gómez",
-        "86":"Nico Toca",
-        "87":"Iván Crespo",
-        "88":"Rodrigo Ramos",
-        "89":"Aitor Crespo",
-        "90":"Manuel González",
-        "91":"Mario Solórzano",
-        "92":"Dani Cobo",
-        "93":"Pablo Lomas",
-        "94":"Diego Díaz"
+        "84":"Adrián Uriarte",
+        "85":"Julián Morales",
+        "86":"Dani Gómez",
+        "87":"Nico Toca",
+        "88":"Iván Crespo",
+        "89":"Rodrigo Ramos",
+        "90":"Aitor Crespo",
+        "91":"Manuel González",
+        "92":"Mario Solórzano",
+        "93":"Dani Cobo",
+        "94":"Pablo Lomas",
+        "95":"Diego Díaz"
     },
     "equipo":{
         "0":"Pontevedra CF",
@@ -185,13 +186,14 @@
         "85":"Gimnástica de Torrelavega",
         "86":"Gimnástica de Torrelavega",
         "87":"Gimnástica de Torrelavega",
-        "88":"Rayo Cantabria",
+        "88":"Gimnástica de Torrelavega",
         "89":"Rayo Cantabria",
         "90":"Rayo Cantabria",
         "91":"Rayo Cantabria",
         "92":"Rayo Cantabria",
         "93":"Rayo Cantabria",
-        "94":"Rayo Cantabria"
+        "94":"Rayo Cantabria",
+        "95":"Rayo Cantabria"
     },
     "procedencia":{
         "0":"CF Talavera",
@@ -279,15 +281,16 @@
         "82":"CD Guijuelo",
         "83":"Depor Fabril",
         "84":"At. Albericia",
-        "85":"CD Tropezón",
-        "86":"CyD Leonesa",
-        "87":"Sin equipo",
-        "88":"Racing Juv. A",
+        "85":"At. Albericia",
+        "86":"CD Tropezón",
+        "87":"CyD Leonesa",
+        "88":"Sin equipo",
         "89":"Racing Juv. A",
         "90":"Racing Juv. A",
         "91":"Racing Juv. A",
         "92":"Racing Juv. A",
         "93":"Racing Juv. A",
-        "94":"Racing Juv. A"
+        "94":"Racing Juv. A",
+        "95":"Racing Juv. A"
     }
 }
