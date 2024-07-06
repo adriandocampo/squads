@@ -7,45 +7,42 @@ Created on Sat Jul  6 14:57:34 2024
 
 import streamlit as st
 import pandas as pd
-import json
+import requests
+from bs4 import BeautifulSoup
 
 with st.sidebar:
     st.page_link('app.py', label='Plantillas', icon='📌')
     st.page_link('pages/fichajes.py', label='Últimos movimientos', icon='✒️')
 
-def load_data(file_path):
-    try:
-        data = pd.read_json(file_path, encoding='utf-8')
-        df = pd.DataFrame(data)
-        return df
-    except json.JSONDecodeError as e:
-        st.error(f"Error loading JSON: {e}")
-        return pd.DataFrame()  # return an empty DataFrame in case of error
-    
-data_file = 'plantillas.json'
-df = load_data(data_file)
-signings = 'fichajes.json'
-sig_df = load_data(signings)
+url = 'https://www.transfermarkt.es/segunda-federacion-grupo-i/letztetransfers/wettbewerb/E4G1'
+headers = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+}
+response = requests.get(url, headers=headers)
+data = pd.read_html(response.content)
+data = data[0]
+data = data[['Edad']]
+
+chunk_size = 5
+
+# List to hold the smaller DataFrames
+df_list = [data.iloc[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
+list_of_lists = [df_chunk.values.tolist() for df_chunk in df_list]
+columns = ['Edad', 'Nombre', 'Posición', 'Desde:', 'A:']
+
+# Create the DataFrame
+df = pd.DataFrame(list_of_lists, columns=columns)
+def list_to_str(lst):
+    return str(lst[0])
+
+# Apply the conversion function to each column in the DataFrame
+df = df.applymap(list_to_str)
 
 if not df.empty:
-    col1, col2, col3 = st.columns([1, 4, 1])
+    col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        st.markdown("<h1 style='text-align: center; color: white; font-size: 2.5em;'>Últimos fichajes</h1>", unsafe_allow_html=True)
-        df['ficha'] = 'P'
-        # Update 'ficha' based on 'sub23' condition
-        for index, row in df.iterrows():
-            if row['sub23']:
-                df.at[index, 'ficha'] = 'Sub23'
-        df['edad'] = df['edad'].apply(lambda x: x['age'] if isinstance(x, dict) and 'age' in x else None)
-        df['since'] = pd.to_datetime(df['since']).dt.date
-        df.sort_values('since', ascending=False, inplace=True)
-        df['since'] = df['since'].apply(lambda x: x.strftime("%d-%m-%Y"))
-        df = df[['nombre', 'edad', 'posicion', 'since', 'ficha']]
-
-        data = pd.merge(df, sig_df, on='nombre', how='inner')
-        data = data[['since', 'nombre', 'edad', 'ficha', 'posicion', 'equipo', 'procedencia']]
-        data.columns = ['Fecha', 'Nombre', 'Edad', 'Ficha', 'Posición', 'Equipo', 'Procedencia']
-        data = data.head(10)
+        st.markdown("<h1 style='text-align: center; color: white; font-size: 2.5em;'>Últimos movimientos</h1>", unsafe_allow_html=True)
+        data = df.head(15)
         st.markdown(data.style.hide(axis="index").to_html(), unsafe_allow_html=True)
         
