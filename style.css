@@ -1,9 +1,0 @@
-div[data-baseweb="select"] > div {
-    background-color: green;
-}
-
-li>span {
-  color: red !important;
-  font-size: 35px;
-  background-color: blue !important;
-}
