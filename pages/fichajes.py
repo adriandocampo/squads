@@ -28,7 +28,7 @@ chunk_size = 5
 # List to hold the smaller DataFrames
 df_list = [data.iloc[i:i + chunk_size] for i in range(0, len(data), chunk_size)]
 list_of_lists = [df_chunk.values.tolist() for df_chunk in df_list]
-columns = ['Edad', 'Nombre', 'Posición', 'Desde:', 'A:']
+columns = [['Edad', 'Nombre', 'Posición', 'Desde:', 'A:']]
 
 # Create the DataFrame
 df = pd.DataFrame(list_of_lists, columns=columns)
