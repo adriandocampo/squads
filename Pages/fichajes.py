@@ -11,7 +11,7 @@ import json
 
 with st.sidebar:
     st.page_link('app.py', label='Plantillas', icon='📌')
-    st.page_link('pages/fichajes.py', label='Últimos movimientos', icon='✒️')
+    st.page_link('Pages/fichajes.py', label='Últimos movimientos', icon='✒️')
 
 def load_data(file_path):
     try:
