@@ -4,4 +4,3 @@ matplotlib
 requests
 bs4
 lxml
-time
