@@ -30,8 +30,6 @@ def wide_space_default():
 wide_space_default()
 
 def get_data(url, selected_team):
-    with st.spinner(f'Cargando plantilla del {selected_team}'):
-        time.sleep(25)
     altas = url.split('startseite')
     altas = f'{altas[0]}transferrekorde{altas[1]}/saison_id/2024'
     bajas = url.split('startseite')
@@ -299,8 +297,8 @@ def main():
         
         url = squads['url'][squads['equipo'] == selected_team]
         url.reset_index(drop=True, inplace=True)
-        df, sig_df, dep_df = get_data(url[0], selected_team)
-
+        with st.spinner(f'Cargando plantilla del {selected_team}'):
+            df, sig_df, dep_df = get_data(url[0], selected_team)
 
         #########
         # Filter data by selected team
